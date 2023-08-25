@@ -21,8 +21,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // cargar conf. rutas.
-// ruta de prueba.
+const userRutes = require("./routes/user");
 
+app.use("/api", userRutes);
+
+// ruta de prueba.
 app.get("/ruta-prueba", (req, res) => {
   return res.status(200).json({
     id: 1,
