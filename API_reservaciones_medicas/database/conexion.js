@@ -2,7 +2,8 @@ const mongoose = require("mongoose");
 
 const conexion = () => {
   try {
-    mongoose.connect("mongodb://localhost:27017/reservaciones_medicas");
+    // usando direccion local
+    mongoose.connect("mongodb://127.0.0.1/reservaciones_medicas");
     console.log("connectado correctamente a reservaciones_medicas");
   } catch (error) {
     console.log(error);
