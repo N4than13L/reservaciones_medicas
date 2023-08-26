@@ -1,9 +1,10 @@
 const mongoose = require("mongoose");
 
-const conexion = () => {
+const conexion = async () => {
   try {
     // usando direccion local
-    mongoose.connect("mongodb://127.0.0.1/reservaciones_medicas");
+    mongoose.set("strictQuery", false);
+    await mongoose.connect("mongodb://127.0.0.1/reservaciones_medicas");
     console.log("connectado correctamente a reservaciones_medicas");
   } catch (error) {
     console.log(error);
