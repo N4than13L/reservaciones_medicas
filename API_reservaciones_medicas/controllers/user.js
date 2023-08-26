@@ -40,11 +40,11 @@ const registro = (req, res) => {
 
       // guardar usuarios.
       usuario_a_guardar.save().then((usuario_guardado) => {
+        // devolver datos de la respuesta.
         if (usuario_guardado) {
-          // devolver datos de la respuesta.
           return res.status(200).json({
             status: "success",
-            message: "usuarios",
+            message: "usuario registrado correctamente",
             usuario: usuario_guardado,
           });
         }
