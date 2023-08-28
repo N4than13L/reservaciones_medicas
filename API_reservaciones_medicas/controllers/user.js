@@ -113,8 +113,38 @@ const login = async (req, res) => {
   }
 };
 
+const perfil = async (req, res) => {
+  // recibir el parametro del id del usuario por la url.
+  const id = req.params.id;
+
+  // sacar datos del usuario.
+  const perfil_usuario = await User.findById(id).select({ password: 0 });
+
+  // comprobar si llegan los datos.
+  try {
+    if (!perfil_usuario) {
+      return res.status(404).send({
+        status: "error",
+        message: "usuario no existe",
+      });
+    }
+
+    // resultado positivo.
+    return res.status(200).send({
+      status: "success",
+      usuarui: perfil_usuario,
+    });
+  } catch (error) {
+    return res.status(404).send({
+      status: "error",
+      message: "error en la consulta, intente en otra ocacion",
+    });
+  }
+};
+
 module.exports = {
   pruebaUser,
   registro,
   login,
+  perfil,
 };
