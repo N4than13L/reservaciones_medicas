@@ -17,6 +17,7 @@ const userSchema = Schema({
     type: String,
     required: true,
   },
+  // campos automaticos.
   role: {
     type: String,
     default: "role_user",
