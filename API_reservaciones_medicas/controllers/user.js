@@ -144,7 +144,7 @@ const perfil = async (req, res) => {
 
 const actualizar = (req, res) => {
   let userIdentity = req.user;
-  var userToUpdate = req.body;
+  let userToUpdate = req.body;
 
   User.find({ $or: [{ email: userToUpdate.email.toLowerCase() }] }).then(
     async (usuarios) => {
@@ -168,15 +168,10 @@ const actualizar = (req, res) => {
       }
 
       try {
-        let user_Updated = await User.findByIdAndUpdate({
-          new: true,
-        });
-
-        if (!user_Updated)
-          return res.status(404).send({
-            status: "error",
-            message: "error al actualizar usuario",
-          });
+        let user_Updated = User.findOneAndUpdate(
+          { _id: userIdentity.id },
+          { new: true }
+        );
 
         return res.status(200).send({
           status: "success",
@@ -186,6 +181,7 @@ const actualizar = (req, res) => {
         return res.status(500).send({
           status: "error",
           message: "error al actualizar",
+          error,
         });
       }
     }

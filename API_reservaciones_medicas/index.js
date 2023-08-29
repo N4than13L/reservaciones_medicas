@@ -22,8 +22,9 @@ app.use(express.urlencoded({ extended: true }));
 
 // cargar conf. rutas.
 const userRutes = require("./routes/user");
-
+const parientRoutes = require("./routes/patient");
 app.use("/api/usuario", userRutes);
+app.use("/api/paciente", parientRoutes);
 
 // ruta de prueba.
 app.get("/ruta-prueba", (req, res) => {
