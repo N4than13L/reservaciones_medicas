@@ -1,6 +1,6 @@
 // importar dependencias y modulos.
 const bcrypt = require("bcrypt");
-const User = require("../models/user");
+const Patient = require("../models/patient");
 
 // importar servicios.
 const jwt = require("../services/jwt");
