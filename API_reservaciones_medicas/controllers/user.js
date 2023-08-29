@@ -132,7 +132,7 @@ const perfil = async (req, res) => {
     // resultado positivo.
     return res.status(200).send({
       status: "success",
-      usuarui: perfil_usuario,
+      usuario: perfil_usuario,
     });
   } catch (error) {
     return res.status(404).send({
@@ -142,9 +142,60 @@ const perfil = async (req, res) => {
   }
 };
 
+const actualizar = (req, res) => {
+  let userIdentity = req.user;
+  var userToUpdate = req.body;
+
+  User.find({ $or: [{ email: userToUpdate.email.toLowerCase() }] }).then(
+    async (usuarios) => {
+      let isset_Usuario = false;
+
+      usuarios.forEach((usuario) => {
+        if (isset_Usuario && usuario._id != userIdentity.id)
+          isset_Usuario = true;
+      });
+
+      if (isset_Usuario == true) {
+        return res
+          .status(200)
+          .json({ status: "success", message: "Usuario existente" });
+      }
+
+      // cifrar la contrasena.
+      if (userToUpdate.password) {
+        let pwd = await bcrypt.hash(userToUpdate.password, 10);
+        userToUpdate.password = pwd;
+      }
+
+      try {
+        let user_Updated = await User.findByIdAndUpdate({
+          new: true,
+        });
+
+        if (!user_Updated)
+          return res.status(404).send({
+            status: "error",
+            message: "error al actualizar usuario",
+          });
+
+        return res.status(200).send({
+          status: "success",
+          user: user_Updated,
+        });
+      } catch (error) {
+        return res.status(500).send({
+          status: "error",
+          message: "error al actualizar",
+        });
+      }
+    }
+  );
+};
+
 module.exports = {
   pruebaUser,
   registro,
   login,
   perfil,
+  actualizar,
 };
