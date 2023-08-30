@@ -1,5 +1,73 @@
 const { Schema, model } = require("mongoose");
 
+// modelo de historial médico.
+const medical_history = Schema({
+  title: {
+    type: String,
+    required: true,
+  },
+  symptoms: {
+    type: String,
+    required: true,
+  },
+  observations: {
+    type: String,
+    required: true,
+  },
+  created_at: {
+    type: Date,
+    default: Date.now(),
+  },
+  user: {
+    type: Schema.ObjectId,
+    ref: "User",
+  },
+});
+
+// modelo de cita médica.
+const medical_appointment = Schema({
+  doctor: {
+    type: String,
+    required: true,
+  },
+  date: {
+    type: String,
+    required: true,
+  },
+  created_at: {
+    type: Date,
+    default: Date.now(),
+  },
+  user: {
+    type: Schema.ObjectId,
+    ref: "User",
+  },
+});
+
+// modelo de factura.
+const medical_bill = Schema({
+  practice_name: {
+    type: String,
+    required: true,
+  },
+  attended_by: {
+    type: String,
+    required: true,
+  },
+  amount: {
+    type: Number,
+    required: true,
+  },
+  created_at: {
+    type: Date,
+    default: Date.now(),
+  },
+  user: {
+    type: Schema.ObjectId,
+    ref: "User",
+  },
+});
+
 const patientSchema = Schema({
   user: {
     type: Schema.ObjectId,
@@ -7,15 +75,12 @@ const patientSchema = Schema({
   },
   name: {
     type: String,
-    required: true,
   },
   surname: {
     type: String,
-    required: true,
   },
   nick: {
     type: String,
-    required: true,
   },
   // campos automaticos.
   role: {
@@ -26,6 +91,9 @@ const patientSchema = Schema({
     type: Date,
     default: Date.now(),
   },
+  medicalhistory: [medical_history],
+  medicalappointment: [medical_appointment],
+  medicalbill: [medical_bill],
 });
 
 module.exports = model("Patient", patientSchema, "patients");

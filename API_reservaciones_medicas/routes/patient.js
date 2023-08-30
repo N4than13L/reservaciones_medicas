@@ -12,5 +12,9 @@ router.post(
   patientsController.guardarPaciente
 );
 
+router.get("/ver-paciente/:id", check.auth, patientsController.paciente);
+
+router.get("/ver-pacientes", check.auth, patientsController.pacientes);
+
 // exportar
 module.exports = router;

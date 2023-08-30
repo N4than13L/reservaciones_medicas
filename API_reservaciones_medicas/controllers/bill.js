@@ -1,14 +1,8 @@
 // importar dependencias y modulos.
 const Patient = require("../models/patient");
 
-// accion de prueba.
-const pruebaHistorialMed = (req, res) => {
-  return res.status(200).send({
-    message: "metodo de prueba desde el controlador de pacientes",
-  });
-};
-
-const guardarHistorialMedico = (req, res) => {
+// accion para guardar la cita medica.
+const guardarFactura = (req, res) => {
   // recoger el id de paciente por la url.
   let pacienteId = req.params.pacienteId;
 
@@ -16,7 +10,7 @@ const guardarHistorialMedico = (req, res) => {
   let params = req.body;
 
   // comprobar que me lleguen los datos (+ validacion).
-  if (!params.title || !params.symptoms || !params.observations) {
+  if (!params.practice_name || !params.attended_by || !params.amount) {
     return res.status(400).json({
       status: "error",
       message: "Faltan datos por enviar.",
@@ -27,19 +21,19 @@ const guardarHistorialMedico = (req, res) => {
     .exec()
     .then((err) => {
       // crear objeto del paciente.
-      let historial_a_guardar = new Patient(params);
+      let factura = new Patient(params);
 
       // hacer un push al array de objetos de historial.
-      historial_a_guardar.medicalhistory.push(params);
+      factura.medicalbill.push(params);
 
       // guardar pacientes.
-      historial_a_guardar.save().then((historial_guardado) => {
+      factura.save().then((factura_guardada) => {
         // devolver datos de la respuesta.
-        if (historial_guardado) {
+        if (factura_guardada) {
           return res.status(200).json({
             status: "success",
-            message: "historial medico guardado correctamente",
-            paciente: historial_guardado,
+            message: "factura guardada correctamente",
+            factura: factura_guardada,
           });
         }
       });
@@ -47,6 +41,5 @@ const guardarHistorialMedico = (req, res) => {
 };
 
 module.exports = {
-  pruebaHistorialMed,
-  guardarHistorialMedico,
+  guardarFactura,
 };
