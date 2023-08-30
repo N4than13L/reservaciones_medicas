@@ -18,9 +18,9 @@ const medical_history = Schema({
     type: Date,
     default: Date.now(),
   },
-  user: {
+  patient: {
     type: Schema.ObjectId,
-    ref: "User",
+    ref: "Patient",
   },
 });
 
@@ -38,9 +38,9 @@ const medical_appointment = Schema({
     type: Date,
     default: Date.now(),
   },
-  user: {
+  patient: {
     type: Schema.ObjectId,
-    ref: "User",
+    ref: "Patient",
   },
 });
 
@@ -62,9 +62,9 @@ const medical_bill = Schema({
     type: Date,
     default: Date.now(),
   },
-  user: {
+  patient: {
     type: Schema.ObjectId,
-    ref: "User",
+    ref: "Patient",
   },
 });
 
@@ -83,10 +83,6 @@ const patientSchema = Schema({
     type: String,
   },
   // campos automaticos.
-  role: {
-    type: String,
-    default: "role_user",
-  },
   created_at: {
     type: Date,
     default: Date.now(),
