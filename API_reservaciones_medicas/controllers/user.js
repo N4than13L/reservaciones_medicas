@@ -26,34 +26,32 @@ const registro = (req, res) => {
   }
 
   // control de usurios duplicados.
-  User.find({ $or: [{ email: params.email.toLowerCase() }] }).then(
-    async (usuarios) => {
-      if (usuarios && usuarios.length >= 1) {
-        return res
-          .status(200)
-          .json({ status: "success", message: "Usuario existente" });
-      }
-
-      // cifrar la contrasena.
-      let pwd = await bcrypt.hash(params.password, 10);
-      params.password = pwd;
-
-      // crear objeto del usuario.
-      let usuario_a_guardar = new User(params);
-
-      // guardar usuarios.
-      usuario_a_guardar.save().then((usuario_guardado) => {
-        // devolver datos de la respuesta.
-        if (usuario_guardado) {
-          return res.status(200).json({
-            status: "success",
-            message: "usuario registrado correctamente",
-            usuario: usuario_guardado,
-          });
-        }
-      });
+  User.find({ $or: [{ email: params.email }] }).then(async (usuarios) => {
+    if (usuarios && usuarios.length >= 1) {
+      return res
+        .status(200)
+        .json({ status: "success", message: "Usuario existente" });
     }
-  );
+
+    // cifrar la contrasena.
+    let pwd = await bcrypt.hash(params.password, 10);
+    params.password = pwd;
+
+    // crear objeto del usuario.
+    let usuario_a_guardar = new User(params);
+
+    // guardar usuarios.
+    usuario_a_guardar.save().then((usuario_guardado) => {
+      // devolver datos de la respuesta.
+      if (usuario_guardado) {
+        return res.status(200).json({
+          status: "success",
+          message: "usuario registrado correctamente",
+          usuario: usuario_guardado,
+        });
+      }
+    });
+  });
 };
 
 // login de usuario.

@@ -17,7 +17,7 @@
 
 */
 import React from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import { Nav } from "reactstrap";
 // javascript plugin used to create scrollbars on windows
 import PerfectScrollbar from "perfect-scrollbar";
@@ -53,42 +53,31 @@ function Sidebar(props) {
       data-active-color={props.activeColor}
     >
       <div className="logo">
-        <a
-          href="https://www.creative-tim.com"
-          className="simple-text logo-mini"
-        >
-          <div className="logo-img">
-            <img src={logo} alt="react-logo" />
-          </div>
-        </a>
-        <a
-          href="https://www.creative-tim.com"
-          className="simple-text logo-normal"
-        >
+        <Link to="/admin/dashboard" className="simple-text logo-normal m-2">
           Dr. nombre
-        </a>
+        </Link>
       </div>
       <div className="sidebar-wrapper" ref={sidebar}>
         <Nav>
           <li>
             <NavLink className="" to="/admin/dashboard">
-              Dashboard
+              Inicio
             </NavLink>
 
             <NavLink className="" to="/admin/icons">
-              Icons
+              Agregar citas
             </NavLink>
 
-            <NavLink className="" to="/admin/user-page">
+            {/* <NavLink className="" to="/admin/user-page">
               user page
-            </NavLink>
+            </NavLink> */}
 
-            <NavLink className="" to="/admin/table-list">
+            {/* <NavLink className="" to="/admin/table-list">
               table-list
-            </NavLink>
+            </NavLink> */}
 
             <NavLink className="" to="/admin/typografy">
-              typografy
+              Logout
             </NavLink>
 
             <NavLink className="" to="/admin/register">

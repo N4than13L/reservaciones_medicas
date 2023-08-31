@@ -21,21 +21,54 @@ import React from "react";
 import { Card, CardHeader, CardBody, Row, Col } from "reactstrap";
 
 export function Login() {
+  let email = document.getElementById("email");
+  let password = document.getElementById("password");
+
+  // email.value = "";
+  // password.value = "";
+
   return (
     <>
       <div className="content">
         <Row>
           <Col md="12">
             <Card>
-              <CardHeader>Google Maps</CardHeader>
+              <CardHeader>Inicia sesion aquí</CardHeader>
               <CardBody>
-                <div
-                  id="map"
-                  className="map"
-                  style={{ position: "relative", overflow: "hidden" }}
-                >
-                  Login
-                </div>
+                <form className="form-group">
+                  {/* lo necesario. */}
+                  <div className="mb-3">
+                    <label htmlFor="email" className="form-label">
+                      Email
+                    </label>
+                    <input
+                      type="email"
+                      className="form-control"
+                      placeholder="Correo electrónico"
+                      name="email"
+                      id="email"
+                    />
+                  </div>
+
+                  <div className="mb-3">
+                    <label htmlFor="password" className="form-label">
+                      password
+                    </label>
+                    <input
+                      type="password"
+                      name="password"
+                      id="password"
+                      placeholder="Contraseña"
+                      className="form-control"
+                    />
+                  </div>
+
+                  <input
+                    type="submit"
+                    value="Login"
+                    className="btn btn-success"
+                  />
+                </form>
               </CardBody>
             </Card>
           </Col>

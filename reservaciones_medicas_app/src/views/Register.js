@@ -17,7 +17,7 @@
 
 */
 /*eslint-disable*/
-import React from "react";
+import React, { useState } from "react";
 // react plugin for creating notifications over the dashboard
 import NotificationAlert from "react-notification-alert";
 // reactstrap components
@@ -25,23 +25,52 @@ import { Card, CardHeader, CardBody, Row, Col } from "reactstrap";
 
 // importando el hook para el form.
 import { UseForm } from "hooks/useForm";
+import { Global } from "helpers/global";
 
 export function Register() {
   // funcion para recoger valores del formulario.
 
   const { form, changed } = UseForm({});
+  const [saved, setSaved] = useState("error");
 
-  const saveUser = (e) => {
-    // prevenir comportamiento por defecto.
+  const saveUser = async (e) => {
+    // prevenir que se recargue la pagina
     e.preventDefault();
 
-    // crear objeto de usuario
-    let newUser = form;
-  };
+    // recoger los datos del formulario.
+    let nombre = document.getElementById("nombre").value;
+    let apellido = document.getElementById("apellido").value;
+    let email = document.getElementById("email").value;
+    let password = document.getElementById("password").value;
+
+    let newUser = {
+      name: nombre,
+      surname: apellido,
+      email: email,
+      password: password,
+    };
+
+    const request = await fetch(Global.url + "usuario/registro", {
+      method: "POST",
+      body: JSON.stringify(newUser),
+      headers: {
+        "Content-Type": "application/json; charset=utf-8",
+      },
+    });
+
+    const data = await request.json();
+    console.log(data);
+    if (data.status == "success") {
+      setSaved("saved");
+    } else {
+      setSaved("error");
+    }
+
+    // console.log(data);
+  }; // fin del metodo de guardar
   return (
     <>
       <div className="content">
-        <NotificationAlert />
         <Row>
           <Col md="12">
             <Card>
@@ -49,6 +78,23 @@ export function Register() {
                 <h2>Registrate aquí</h2>
               </CardHeader>
               <CardBody>
+                {/* alerta si si envio el usuario */}
+                <div className="mb-3">
+                  {saved == "saved" ? (
+                    <strong className="alert alert-success">
+                      Usuario guardado exitosamente
+                    </strong>
+                  ) : (
+                    ""
+                  )}
+                  {saved == "error" ? (
+                    <strong className="alert alert-danger">
+                      Error al registrar
+                    </strong>
+                  ) : (
+                    ""
+                  )}
+                </div>
                 <form className="form-group" onSubmit={saveUser}>
                   <div className="mb-3">
                     <label
@@ -63,6 +109,7 @@ export function Register() {
                       className="form-control"
                       placeholder="Nombre"
                       name="nombre"
+                      id="nombre"
                     />
                   </div>
 
@@ -75,6 +122,7 @@ export function Register() {
                       className="form-control"
                       placeholder="Apellido"
                       name="apellido"
+                      id="apellido"
                     />
                   </div>
 
@@ -85,8 +133,9 @@ export function Register() {
                     <input
                       type="email"
                       className="form-control"
-                      placeholder="Email"
+                      placeholder="Correo electrónico"
                       name="email"
+                      id="email"
                     />
                   </div>
 
@@ -96,8 +145,10 @@ export function Register() {
                     </label>
                     <input
                       type="password"
-                      name="password"
+                      placeholder="Contraseña"
                       className="form-control"
+                      name="password"
+                      id="password"
                     />
                   </div>
 
