@@ -65,26 +65,40 @@ function Sidebar(props) {
           href="https://www.creative-tim.com"
           className="simple-text logo-normal"
         >
-          Creative Tim
+          Dr. nombre
         </a>
       </div>
       <div className="sidebar-wrapper" ref={sidebar}>
         <Nav>
-          {props.routes.map((prop, key) => {
-            return (
-              <li
-                className={
-                  activeRoute(prop.path) + (prop.pro ? " active-pro" : "")
-                }
-                key={key}
-              >
-                <NavLink to={prop.layout + prop.path} className="nav-NavLink">
-                  <i className={prop.icon} />
-                  <p>{prop.name}</p>
-                </NavLink>
-              </li>
-            );
-          })}
+          <li>
+            <NavLink className="" to="/admin/dashboard">
+              Dashboard
+            </NavLink>
+
+            <NavLink className="" to="/admin/icons">
+              Icons
+            </NavLink>
+
+            <NavLink className="" to="/admin/user-page">
+              user page
+            </NavLink>
+
+            <NavLink className="" to="/admin/table-list">
+              table-list
+            </NavLink>
+
+            <NavLink className="" to="/admin/typografy">
+              typografy
+            </NavLink>
+
+            <NavLink className="" to="/admin/register">
+              registro
+            </NavLink>
+
+            <NavLink className="" to="/admin/login">
+              Login
+            </NavLink>
+          </li>
         </Nav>
       </div>
     </div>

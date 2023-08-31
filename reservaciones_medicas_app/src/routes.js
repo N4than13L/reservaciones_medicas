@@ -17,13 +17,13 @@
 
 */
 import Dashboard from "views/Dashboard.js";
-import Notifications from "views/Notifications.js";
 import Icons from "views/Icons.js";
 import Typography from "views/Typography.js";
 import TableList from "views/Tables.js";
-import Maps from "views/Map.js";
 import UserPage from "views/User.js";
 import UpgradeToPro from "views/Upgrade.js";
+import { Register } from "views/Register";
+import { Login } from "views/Login";
 
 var routes = [
   {
@@ -41,17 +41,17 @@ var routes = [
     layout: "/admin",
   },
   {
-    path: "/maps",
-    name: "Maps",
+    path: "/login",
+    name: "Login",
     icon: "nc-icon nc-pin-3",
-    component: <Maps />,
+    component: <Login />,
     layout: "/admin",
   },
   {
-    path: "/notifications",
-    name: "Notifications",
+    path: "/register",
+    name: "Register",
     icon: "nc-icon nc-bell-55",
-    component: <Notifications />,
+    component: <Register />,
     layout: "/admin",
   },
   {
