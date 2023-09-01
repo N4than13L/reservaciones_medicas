@@ -16,17 +16,27 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { Nav } from "reactstrap";
 // javascript plugin used to create scrollbars on windows
 import PerfectScrollbar from "perfect-scrollbar";
 
-import logo from "logo.svg";
-
 var ps;
 
 function Sidebar(props) {
+  const [usuario, setUsuario] = useState("");
+  const [perfil, setPerfil] = useState(false);
+
+  const profile = () => {
+    return JSON.parse(localStorage.getItem("user"));
+  };
+
+  useEffect(() => {
+    setUsuario(profile);
+    setPerfil(true);
+  }, []);
+
   const location = useLocation();
   const sidebar = React.useRef();
   // verifies if routeName is the one active (in browser input)
@@ -46,6 +56,17 @@ function Sidebar(props) {
       }
     };
   });
+
+  const logout = () => {
+    // redireccion
+    setTimeout(() => {
+      window.location.href = "/admin/login";
+    }, 500);
+
+    // redireccion
+    localStorage.clear();
+  };
+
   return (
     <div
       className="sidebar"
@@ -54,39 +75,55 @@ function Sidebar(props) {
     >
       <div className="logo">
         <Link to="/admin/dashboard" className="simple-text logo-normal m-2">
-          Dr. nombre
+          {!!setPerfil && usuario != null ? (
+            <p>
+              Dr. {usuario.name} {usuario.surname}
+            </p>
+          ) : (
+            <p>Dr. tú</p>
+          )}
         </Link>
       </div>
       <div className="sidebar-wrapper" ref={sidebar}>
         <Nav>
           <li>
-            <NavLink className="" to="/admin/dashboard">
-              Inicio
-            </NavLink>
+            {!!setPerfil && usuario != null ? (
+              <>
+                <NavLink className="" to="/admin/dashboard">
+                  Inicio
+                </NavLink>
 
-            <NavLink className="" to="/admin/icons">
-              Agregar citas
-            </NavLink>
+                <NavLink className="" to="/admin/agregarcitas">
+                  Agregar citas
+                </NavLink>
 
-            {/* <NavLink className="" to="/admin/user-page">
+                <NavLink className="" to="/admin/vercitas">
+                  Ver citas
+                </NavLink>
+
+                {/* <NavLink className="" to="/admin/user-page">
               user page
             </NavLink> */}
 
-            {/* <NavLink className="" to="/admin/table-list">
+                {/* <NavLink className="" to="/admin/table-list">
               table-list
             </NavLink> */}
 
-            <NavLink className="" to="/admin/typografy">
-              Logout
-            </NavLink>
+                <NavLink className="" onClick={logout} to="/admin/typografy">
+                  Logout
+                </NavLink>
+              </>
+            ) : (
+              <>
+                <NavLink className="" to="/admin/register">
+                  registro
+                </NavLink>
 
-            <NavLink className="" to="/admin/register">
-              registro
-            </NavLink>
-
-            <NavLink className="" to="/admin/login">
-              Login
-            </NavLink>
+                <NavLink className="" to="/admin/login">
+                  Login
+                </NavLink>
+              </>
+            )}
           </li>
         </Nav>
       </div>

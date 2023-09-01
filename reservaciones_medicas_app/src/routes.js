@@ -17,7 +17,7 @@
 
 */
 import Dashboard from "views/Dashboard.js";
-import Icons from "views/Icons.js";
+import Dates from "views/Dates";
 import Typography from "views/Typography.js";
 import TableList from "views/Tables.js";
 import UserPage from "views/User.js";
@@ -34,10 +34,10 @@ var routes = [
     layout: "/admin",
   },
   {
-    path: "/icons",
+    path: "/agregarcitas",
     name: "Icons",
     icon: "nc-icon nc-diamond",
-    component: <Icons />,
+    component: <Dates />,
     layout: "/admin",
   },
   {

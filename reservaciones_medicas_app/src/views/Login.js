@@ -16,16 +16,63 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React from "react";
+import { Global } from "helpers/global";
+// import UseAuth from "hooks/useAuth";
+import { UseForm } from "hooks/useForm";
+import React, { useState } from "react";
 // reactstrap components
 import { Card, CardHeader, CardBody, Row, Col } from "reactstrap";
 
 export function Login() {
-  let email = document.getElementById("email");
-  let password = document.getElementById("password");
+  const { form, changed } = UseForm({});
+  const [saved, setSaved] = useState("not_saved");
 
-  // email.value = "";
-  // password.value = "";
+  // const { compartido } = UseAuth();
+  // const { setAuth } = UseAuth();
+
+  const loginUser = async (e) => {
+    // prevenir que se recargue la pagina
+    e.preventDefault();
+
+    // recoger los datos del formulario.
+    let email = document.getElementById("email").value;
+    let password = document.getElementById("password").value;
+
+    let newUser = {
+      email: email,
+      password: password,
+    };
+
+    const request = await fetch(Global.url + "usuario/login", {
+      method: "POST",
+      body: JSON.stringify(newUser),
+      headers: {
+        "Content-Type": "application/json; charset=utf-8",
+      },
+    });
+
+    const data = await request.json();
+    console.log(data);
+
+    if (data.status == "success") {
+      // persistir datos en el navegador en el navegador.
+
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("user", JSON.stringify(data.user));
+
+      setSaved("login");
+
+      // setear datos en el auth.
+      // setAuth(data.user);
+
+      // redireciion.
+      setTimeout(() => {
+        window.location.href = "/admin/dashboard";
+      }, 500);
+    } else {
+      setSaved("error");
+    }
+  }; // fin del metodo de guardar
 
   return (
     <>
@@ -35,7 +82,25 @@ export function Login() {
             <Card>
               <CardHeader>Inicia sesion aquí</CardHeader>
               <CardBody>
-                <form className="form-group">
+                <form className="form-group" onSubmit={loginUser}>
+                  <div className="mb-3">
+                    {saved == "login" ? (
+                      <strong className="alert alert-success">
+                        usuario identificado correctamente
+                      </strong>
+                    ) : (
+                      ""
+                    )}
+
+                    {saved == "error" ? (
+                      <strong className="alert alert-danger">
+                        error al identificar.
+                      </strong>
+                    ) : (
+                      ""
+                    )}
+                  </div>
+
                   {/* lo necesario. */}
                   <div className="mb-3">
                     <label htmlFor="email" className="form-label">
