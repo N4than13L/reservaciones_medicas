@@ -18,12 +18,13 @@
 */
 import Dashboard from "views/Dashboard.js";
 import Dates from "views/Dates";
-import Typography from "views/Typography.js";
-import TableList from "views/Tables.js";
+// import Typography from "views/Typography.js";
+// import TableList from "views/Tables.js";
 import UserPage from "views/User.js";
 import UpgradeToPro from "views/Upgrade.js";
 import { Register } from "views/Register";
 import { Login } from "views/Login";
+import Watch from "views/Watch";
 
 var routes = [
   {
@@ -62,19 +63,19 @@ var routes = [
     layout: "/admin",
   },
   {
-    path: "/tables",
-    name: "Table List",
+    path: "/vercitas",
+    name: "Ver citas",
     icon: "nc-icon nc-tile-56",
-    component: <TableList />,
+    component: <Watch />,
     layout: "/admin",
   },
-  {
-    path: "/typography",
-    name: "Typography",
-    icon: "nc-icon nc-caps-small",
-    component: <Typography />,
-    layout: "/admin",
-  },
+  // {
+  //   path: "/typography",
+  //   name: "Typography",
+  //   icon: "nc-icon nc-caps-small",
+  //   component: <Typography />,
+  //   layout: "/admin",
+  // },
   {
     pro: true,
     path: "/upgrade",

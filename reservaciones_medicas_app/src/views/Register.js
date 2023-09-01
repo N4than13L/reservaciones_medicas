@@ -29,7 +29,6 @@ import { Global } from "helpers/global";
 
 export function Register() {
   // funcion para recoger valores del formulario.
-
   const { form, changed } = UseForm({});
   const [saved, setSaved] = useState("error");
 
