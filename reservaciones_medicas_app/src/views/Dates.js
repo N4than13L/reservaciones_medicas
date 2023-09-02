@@ -110,17 +110,15 @@ export default function Dates() {
                     <input
                       type="text"
                       className="form-control"
-                      placeholder="Apodo"
-                      name="apodo"
+                      placeholder="Fecha"
+                      name="fecha"
                       id="fecha"
                     />
                   </div>
 
-                  <input
-                    type="submit"
-                    value="Guardar cita"
-                    className="btn btn-info"
-                  />
+                  <button type="submit" className="btn btn-info">
+                    <i className="fa-solid fa-floppy-disk"></i> Guardar
+                  </button>
                 </form>
               </CardBody>
             </Card>

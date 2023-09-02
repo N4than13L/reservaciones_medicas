@@ -1,6 +1,7 @@
 import React from "react";
 // react plugin used to create charts
 import { Line, Pie } from "react-chartjs-2";
+import { NavLink } from "react-router-dom";
 // reactstrap components
 import {
   Card,
@@ -24,6 +25,9 @@ function Watch() {
       <div className="content">
         <Row>
           <Col md="12">
+            <NavLink className="btn btn-success" to="/admin/agregarcitas">
+              <i className="fa-solid fa-floppy-disk"></i>
+            </NavLink>
             <Card>
               <CardHeader>
                 <CardTitle tag="h5">Citas pendientes</CardTitle>

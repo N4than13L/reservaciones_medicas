@@ -90,37 +90,34 @@ function Sidebar(props) {
             {!!setPerfil && usuario != null ? (
               <>
                 <NavLink className="" to="/admin/dashboard">
-                  Inicio
-                </NavLink>
-
-                <NavLink className="" to="/admin/agregarcitas">
-                  Agregar citas
+                  <i className="fa-solid fa-house"></i> Inicio
                 </NavLink>
 
                 <NavLink className="" to="/admin/vercitas">
-                  Ver citas
+                  <i className="fa-solid fa-table-list"></i> Ver citas
                 </NavLink>
 
-                {/* <NavLink className="" to="/admin/user-page">
-              user page
-            </NavLink> */}
+                <NavLink className="" to="">
+                  <i class="fa-solid fa-book-medical"></i> Historial
+                </NavLink>
 
-                {/* <NavLink className="" to="/admin/table-list">
-              table-list
-            </NavLink> */}
+                <NavLink className="" to="">
+                  <i className="fa-solid fa-file-invoice-dollar"></i> Factura
+                </NavLink>
 
                 <NavLink className="" onClick={logout} to="/admin/typografy">
+                  <i className="fa-solid fa-right-from-bracket"></i>
                   Logout
                 </NavLink>
               </>
             ) : (
               <>
                 <NavLink className="" to="/admin/register">
-                  registro
+                  <i className="fa-solid fa-address-card"></i> Registro
                 </NavLink>
 
                 <NavLink className="" to="/admin/login">
-                  Login
+                  <i class="fa-solid fa-right-to-bracket"></i> Login
                 </NavLink>
               </>
             )}
