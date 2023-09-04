@@ -74,13 +74,13 @@ function Sidebar(props) {
       data-active-color={props.activeColor}
     >
       <div className="logo">
-        <Link to="/admin/dashboard" className="simple-text logo-normal m-2">
+        <Link to="/admin/dashboard" className="simple-text logo-normal">
           {!!setPerfil && usuario != null ? (
             <p>
               Dr. {usuario.name} {usuario.surname}
             </p>
           ) : (
-            <p>Dr. tú</p>
+            <p></p>
           )}
         </Link>
       </div>

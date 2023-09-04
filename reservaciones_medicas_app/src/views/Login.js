@@ -76,7 +76,7 @@ export function Login() {
 
                     {saved == "error" ? (
                       <strong className="alert alert-danger">
-                        error al identificar.
+                        error al identificar, usuario no encontrado
                       </strong>
                     ) : (
                       ""

@@ -33,14 +33,14 @@ import Add_Bill from "views/Add_Bill";
 var routes = [
   {
     path: "/dashboard",
-    name: "Dashboard",
+    name: "Inicio",
     icon: "nc-icon nc-bank",
     component: <Dashboard />,
     layout: "/admin",
   },
   {
     path: "/historial",
-    name: "Icons",
+    name: "historial medico",
     icon: "nc-icon nc-diamond",
     component: <Medical_History />,
     layout: "/admin",
@@ -98,11 +98,12 @@ var routes = [
   },
   {
     path: "/vercitas",
-    name: "Ver citas",
+    name: "citas pendientes",
     icon: "nc-icon nc-tile-56",
     component: <Watch />,
     layout: "/admin",
   },
+
   // {
   //   path: "/typography",
   //   name: "Typography",
@@ -110,6 +111,7 @@ var routes = [
   //   component: <Typography />,
   //   layout: "/admin",
   // },
+
   {
     pro: true,
     path: "/upgrade",
