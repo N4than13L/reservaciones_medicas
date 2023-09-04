@@ -23,7 +23,7 @@ import {
 function Watch() {
   // funcion para recoger valores del formulario.
   const [saved, setSaved] = useState("error");
-  const [pacientes, setPaciente] = useState([]);
+  const [pacientes, setPaciente] = useState([{}]);
 
   useEffect(() => {
     sacar_pacientes();
@@ -41,7 +41,7 @@ function Watch() {
     });
 
     const paciente = await request.json();
-    console.log(paciente);
+    setPaciente(paciente.pacientes);
   };
 
   return (
@@ -56,20 +56,25 @@ function Watch() {
               <CardHeader>
                 <CardTitle tag="h5">Citas pendientes</CardTitle>
               </CardHeader>
-              <CardBody>
-                <>
-                  {Array.isArray(
-                    pacientes?.map((art) => {
-                      return (
-                        <tr key={art._id}>
-                          <td>{art.name}</td>
-                          <td>{art.surname}</td>
-                          <td>{art.date}</td>
-                        </tr>
-                      );
-                    })
-                  )}
-                </>
+              <CardBody className="opacity-50">
+                {pacientes?.map((pac) => {
+                  return (
+                    <article
+                      className="card card-body bg-info p-4"
+                      key={pac.id}
+                    >
+                      <h5>Cita</h5>
+                      <strong>Nombre: </strong>
+                      <p> {pac.name}</p>
+
+                      <strong>Apellido: </strong>
+                      <p>{pac.surname}</p>
+
+                      <strong>Cita para el:</strong>
+                      <p>{pac.date}</p>
+                    </article>
+                  );
+                })}
               </CardBody>
             </Card>
           </Col>

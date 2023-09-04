@@ -42,6 +42,10 @@ export default function Dates() {
     console.log(data);
     if (data.status == "success") {
       setSaved("saved");
+      // redireciion.
+      setTimeout(() => {
+        window.location.href = "/admin/vercitas";
+      }, 500);
     } else {
       setSaved("error");
     }
