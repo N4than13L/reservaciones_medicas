@@ -41,14 +41,7 @@ function Watch() {
     });
 
     const paciente = await request.json();
-    // console.log(paciente);
-
-    if (paciente.status == "success") {
-      setPaciente(paciente);
-      setSaved("exito");
-    } else {
-      setSaved("error");
-    }
+    console.log(paciente);
   };
 
   return (
@@ -65,15 +58,17 @@ function Watch() {
               </CardHeader>
               <CardBody>
                 <>
-                  {pacientes?.map((art) => {
-                    return (
-                      <tr key={art._id}>
-                        <td>{art.name}</td>
-                        <td>{art.surname}</td>
-                        <td>{art.date}</td>
-                      </tr>
-                    );
-                  })}
+                  {Array.isArray(
+                    pacientes?.map((art) => {
+                      return (
+                        <tr key={art._id}>
+                          <td>{art.name}</td>
+                          <td>{art.surname}</td>
+                          <td>{art.date}</td>
+                        </tr>
+                      );
+                    })
+                  )}
                 </>
               </CardBody>
             </Card>
