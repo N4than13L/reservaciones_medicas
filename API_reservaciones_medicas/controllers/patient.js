@@ -13,7 +13,7 @@ const guardarPaciente = (req, res) => {
   let params = req.body;
 
   // comprobar que me lleguen los datos (+ validacion).
-  if (!params.name || !params.surname || !params.nick) {
+  if (!params.name || !params.surname || !params.date) {
     return res.status(400).json({
       status: "error",
       message: "Faltan datos por enviar.",

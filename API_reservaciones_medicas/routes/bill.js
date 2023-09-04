@@ -5,7 +5,7 @@ const factura = require("../controllers/bill");
 const check = require("../middlewares/auth");
 
 // definir rutas
-router.post("/guardar-factura/:id", check.auth, factura.guardarFactura);
+router.post("/guardar-factura", check.auth, factura.guardarFactura);
 
 // exportar
 module.exports = router;

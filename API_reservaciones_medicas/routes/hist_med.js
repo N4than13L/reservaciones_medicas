@@ -7,7 +7,7 @@ const check = require("../middlewares/auth");
 // definir rutas
 // router.get("/paciente-test", patientsController.pruebaPatient);
 router.post(
-  "/guardar-hist-med/:id",
+  "/guardar-hist-med/",
   check.auth,
   historialMed.guardarHistorialMedico
 );

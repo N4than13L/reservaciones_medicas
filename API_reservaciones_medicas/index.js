@@ -24,14 +24,12 @@ app.use(express.urlencoded({ extended: true }));
 const userRutes = require("./routes/user");
 const parientRoutes = require("./routes/patient");
 const medicalHis = require("./routes/hist_med");
-const citaMedica = require("./routes/medical_app");
 const factura = require("./routes/bill");
 
 // importando las rutas.
 app.use("/api/usuario", userRutes);
 app.use("/api/paciente", parientRoutes);
 app.use("/api/historial", medicalHis);
-app.use("/api/cita-medica", citaMedica);
 app.use("/api/factura", factura);
 
 // ruta de prueba.

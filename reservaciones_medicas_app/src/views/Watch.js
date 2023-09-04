@@ -26,7 +26,7 @@ function Watch() {
         <Row>
           <Col md="12">
             <NavLink className="btn btn-success" to="/admin/agregarcitas">
-              <i className="fa-solid fa-floppy-disk"></i>
+              <i class="fa-solid fa-plus"></i>
             </NavLink>
             <Card>
               <CardHeader>
