@@ -101,7 +101,7 @@ function Sidebar(props) {
                   <i class="fa-solid fa-book-medical"></i> Historial médico
                 </NavLink>
 
-                <NavLink className="" to="">
+                <NavLink className="" to="/admin/factura">
                   <i className="fa-solid fa-file-invoice-dollar"></i> Factura
                 </NavLink>
 

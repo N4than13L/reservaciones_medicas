@@ -27,6 +27,8 @@ import { Login } from "views/Login";
 import Watch from "views/Watch";
 import Medical_History from "views/Med_his";
 import Add_Medical_History from "views/Add_Med_His";
+import Bill from "views/Bill";
+import Add_Bill from "views/Add_Bill";
 
 var routes = [
   {
@@ -45,9 +47,25 @@ var routes = [
   },
   {
     path: "/agregar-historial",
-    name: "Icons",
+    name: "agregar historial medico",
     icon: "nc-icon nc-diamond",
     component: <Add_Medical_History />,
+    layout: "/admin",
+  },
+
+  {
+    path: "/factura",
+    name: "factura",
+    icon: "nc-icon nc-diamond",
+    component: <Bill />,
+    layout: "/admin",
+  },
+
+  {
+    path: "/agregar-factura",
+    name: "agregar-factura",
+    icon: "nc-icon nc-diamond",
+    component: <Add_Bill />,
     layout: "/admin",
   },
   {
