@@ -1,4 +1,5 @@
-import React from "react";
+import { Global } from "helpers/global";
+import React, { useEffect, useState } from "react";
 // react plugin used to create charts
 import { Line, Pie } from "react-chartjs-2";
 import { NavLink } from "react-router-dom";
@@ -20,6 +21,35 @@ import {
 } from "variables/charts.js";
 
 function Watch() {
+  // funcion para recoger valores del formulario.
+  const [saved, setSaved] = useState("error");
+  const [pacientes, setPaciente] = useState([]);
+
+  let token = localStorage.getItem("token");
+
+  const sacar_pacientes = async () => {
+    const request = await fetch(Global.url + "paciente/ver-pacientes", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: token,
+      },
+    });
+
+    const paciente = await request.json();
+    console.log(paciente);
+
+    if (paciente.status == "success") {
+      setSaved("exito");
+    } else {
+      setSaved("error");
+    }
+  };
+
+  useEffect(() => {
+    sacar_pacientes();
+  });
+
   return (
     <>
       <div className="content">
@@ -34,13 +64,15 @@ function Watch() {
               </CardHeader>
               <CardBody>
                 <article>
-                  <h5>Nombre y apellido paciente</h5>
-                  <span>
-                    Fecha de la cita <strong>2/2023</strong>
-                  </span>
-                  <p>
-                    Fecha de creación <strong>1/1/2023</strong>
-                  </p>
+                  {pacientes.map((art) => {
+                    return (
+                      <tr key={art.id}>
+                        <td>{art.name}</td>
+                        <td>{art.surname}</td>
+                        <td>{art.date}</td>
+                      </tr>
+                    );
+                  })}
                 </article>
               </CardBody>
             </Card>
