@@ -97,8 +97,8 @@ function Sidebar(props) {
                   <i className="fa-solid fa-table-list"></i> Ver citas
                 </NavLink>
 
-                <NavLink className="" to="">
-                  <i class="fa-solid fa-book-medical"></i> Historial
+                <NavLink className="" to="/admin/historial">
+                  <i class="fa-solid fa-book-medical"></i> Historial médico
                 </NavLink>
 
                 <NavLink className="" to="">

@@ -25,6 +25,8 @@ import UpgradeToPro from "views/Upgrade.js";
 import { Register } from "views/Register";
 import { Login } from "views/Login";
 import Watch from "views/Watch";
+import Medical_History from "views/Med_his";
+import Add_Medical_History from "views/Add_Med_His";
 
 var routes = [
   {
@@ -32,6 +34,20 @@ var routes = [
     name: "Dashboard",
     icon: "nc-icon nc-bank",
     component: <Dashboard />,
+    layout: "/admin",
+  },
+  {
+    path: "/historial",
+    name: "Icons",
+    icon: "nc-icon nc-diamond",
+    component: <Medical_History />,
+    layout: "/admin",
+  },
+  {
+    path: "/agregar-historial",
+    name: "Icons",
+    icon: "nc-icon nc-diamond",
+    component: <Add_Medical_History />,
     layout: "/admin",
   },
   {

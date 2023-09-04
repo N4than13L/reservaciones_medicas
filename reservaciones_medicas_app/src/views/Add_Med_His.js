@@ -8,7 +8,7 @@ import { Global } from "helpers/global";
 import { Card, CardHeader, CardBody, CardTitle, Row, Col } from "reactstrap";
 import { NavLink } from "react-router-dom";
 
-export default function Dates() {
+export default function Add_Medical_History() {
   // funcion para recoger valores del formulario.
   const { form, changed } = UseForm({});
   const [saved, setSaved] = useState("error");
@@ -17,19 +17,17 @@ export default function Dates() {
     e.preventDefault();
 
     // recoger los datos del formulario.
-    let nombre = document.getElementById("nombre").value;
-    let apellido = document.getElementById("apellido").value;
-    let fecha = document.getElementById("fecha").value;
+    let client = document.getElementById("client").value;
+    let symptoms = document.getElementById("symptoms").value;
 
     let newUser = {
-      name: nombre,
-      surname: apellido,
-      date: fecha,
+      client: client,
+      symptoms: symptoms,
     };
 
     let token = localStorage.getItem("token");
 
-    const request = await fetch(Global.url + "paciente/guardar-paciente", {
+    const request = await fetch(Global.url + "historial/guardar-hist-med", {
       method: "POST",
       body: JSON.stringify(newUser),
       headers: {
@@ -53,7 +51,7 @@ export default function Dates() {
       <div className="content">
         <Row>
           <Col md="12">
-            <NavLink className="btn btn-success" to="/admin/vercitas">
+            <NavLink className="btn btn-success" to="/admin/historial">
               <i class="fa-solid fa-chevron-left"></i>
             </NavLink>
             <Card className="demo-icons">
@@ -81,50 +79,33 @@ export default function Dates() {
                 </div>
                 <form className="form-group" onSubmit={saveUser}>
                   <div className="mb-3">
-                    <label
-                      htmlFor="nombre"
-                      form="nombre"
-                      className="form-label"
-                    >
-                      Nombre
+                    <label htmlFor="client" className="form-label">
+                      cliente
                     </label>
                     <input
                       type="text"
                       className="form-control"
-                      placeholder="Nombre"
-                      name="nombre"
-                      id="nombre"
+                      placeholder="paciente"
+                      name="client"
+                      id="client"
                     />
                   </div>
 
                   <div className="mb-3">
-                    <label htmlFor="apellido" className="form-label">
-                      apellido
+                    <label htmlFor="symptoms" className="form-label">
+                      sintomas
                     </label>
                     <input
                       type="text"
                       className="form-control"
-                      placeholder="Apellido"
-                      name="apellido"
-                      id="apellido"
-                    />
-                  </div>
-
-                  <div className="mb-3">
-                    <label htmlFor="apodo" className="form-label">
-                      fecha
-                    </label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Fecha"
-                      name="fecha"
-                      id="fecha"
+                      placeholder="sintomas"
+                      name="symptoms"
+                      id="symptoms"
                     />
                   </div>
 
                   <button type="submit" className="btn btn-info">
-                    <i className="fa-solid fa-floppy-disk"></i> Guardar
+                    <i className="fa-solid fa-floppy-disk"></i> Guardar Registro
                   </button>
                 </form>
               </CardBody>
