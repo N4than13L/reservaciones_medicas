@@ -25,6 +25,10 @@ function Watch() {
   const [saved, setSaved] = useState("error");
   const [pacientes, setPaciente] = useState([]);
 
+  useEffect(() => {
+    sacar_pacientes();
+  });
+
   let token = localStorage.getItem("token");
 
   const sacar_pacientes = async () => {
@@ -37,18 +41,15 @@ function Watch() {
     });
 
     const paciente = await request.json();
-    console.log(paciente);
+    // console.log(paciente);
 
     if (paciente.status == "success") {
+      setPaciente(paciente);
       setSaved("exito");
     } else {
       setSaved("error");
     }
   };
-
-  useEffect(() => {
-    sacar_pacientes();
-  });
 
   return (
     <>
@@ -63,17 +64,17 @@ function Watch() {
                 <CardTitle tag="h5">Citas pendientes</CardTitle>
               </CardHeader>
               <CardBody>
-                <article>
-                  {pacientes.map((art) => {
+                <>
+                  {pacientes?.map((art) => {
                     return (
-                      <tr key={art.id}>
+                      <tr key={art._id}>
                         <td>{art.name}</td>
                         <td>{art.surname}</td>
                         <td>{art.date}</td>
                       </tr>
                     );
                   })}
-                </article>
+                </>
               </CardBody>
             </Card>
           </Col>
