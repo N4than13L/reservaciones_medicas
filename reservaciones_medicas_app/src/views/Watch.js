@@ -63,7 +63,9 @@ function Watch() {
                       className="card card-body bg-info p-4"
                       key={pac.id}
                     >
-                      <h5>Cita</h5>
+                      <h5>
+                        <ins>Cita</ins>
+                      </h5>
                       <strong>Nombre: </strong>
                       <p> {pac.name}</p>
 
