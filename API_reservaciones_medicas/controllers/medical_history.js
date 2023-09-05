@@ -42,7 +42,36 @@ const guardarHistorialMedico = (req, res) => {
   });
 };
 
+// sacar historial.
+const historiales = async (req, res) => {
+  // sacar datos del usuario.
+  const historiales_datos = await Patient.find().exec();
+  // console.log(historiales_datos);
+
+  // comprobar si llegan los datos.
+  try {
+    if (!historiales_datos) {
+      return res.status(404).send({
+        status: "error",
+        message: "no hay historial registrado",
+      });
+    }
+
+    // resultado positivo.
+    return res.status(200).send({
+      status: "success",
+      historiales: historiales_datos,
+    });
+  } catch (error) {
+    return res.status(404).send({
+      status: "error",
+      message: "error en la consulta, intente en otra ocacion",
+    });
+  }
+};
+
 module.exports = {
   pruebaHistorialMed,
   guardarHistorialMedico,
+  historiales,
 };

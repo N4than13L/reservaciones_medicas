@@ -12,5 +12,7 @@ router.post(
   historialMed.guardarHistorialMedico
 );
 
+router.get("/hist-medico/", check.auth, historialMed.historiales);
+
 // exportar
 module.exports = router;

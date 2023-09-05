@@ -64,7 +64,7 @@ function Watch() {
                       key={pac.id}
                     >
                       <h5>
-                        <ins>Cita</ins>
+                        Cita no: <strong>{pac._id}</strong>
                       </h5>
                       <strong>Nombre: </strong>
                       <p> {pac.name}</p>

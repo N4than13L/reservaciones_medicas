@@ -41,6 +41,35 @@ const guardarFactura = (req, res) => {
   });
 };
 
+// sacar historial.
+const ver_factura = async (req, res) => {
+  // sacar datos del usuario.
+  const factura_datos = await Patient.find().exec();
+  // console.log(historiales_datos);
+
+  // comprobar si llegan los datos.
+  try {
+    if (!factura_datos) {
+      return res.status(404).send({
+        status: "error",
+        message: "no hay historial registrado",
+      });
+    }
+
+    // resultado positivo.
+    return res.status(200).send({
+      status: "success",
+      facturas: factura_datos,
+    });
+  } catch (error) {
+    return res.status(404).send({
+      status: "error",
+      message: "error en la consulta, intente en otra ocacion",
+    });
+  }
+};
+
 module.exports = {
   guardarFactura,
+  ver_factura,
 };
